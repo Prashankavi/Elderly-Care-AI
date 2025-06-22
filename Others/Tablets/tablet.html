@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tablet Info for Seniors - Your Complete Medication Guide</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        font-size: 18px;
+      }
+
+      /* High Contrast Mode Styles */
+      body.high-contrast {
+        background: #000;
+        color: #fff;
+      }
+
+      body.high-contrast .header,
+      body.high-contrast .search-section,
+      body.high-contrast .categories,
+      body.high-contrast .footer,
+      body.high-contrast .accessibility-controls {
+        background: #000;
+        border: 2px solid #fff;
+      }
+
+      body.high-contrast .medication-card {
+        background: #000;
+        border: 2px solid #fff;
+        color: #fff;
+      }
+
+      body.high-contrast .medication-name,
+      body.high-contrast h1,
+      body.high-contrast h2,
+      body.high-contrast h3 {
+        color: #ffff00;
+      }
+
+      body.high-contrast .category-button,
+      body.high-contrast .search-button,
+      body.high-contrast .page-button {
+        background: #000;
+        color: #fff;
+        border: 2px solid #fff;
+      }
+
+      body.high-contrast .category-button.active,
+      body.high-contrast .search-button:hover,
+      body.high-contrast .page-button.active {
+        background: #fff;
+        color: #000;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Header Styles */
+      .header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(78, 115, 223, 0.1), transparent);
+        animation: shimmer 3s infinite;
+      }
+
+      @keyframes shimmer {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        color: #4e73df;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        color: #666;
+        position: relative;
+        z-index: 1;
+      }
+
+      .back-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: #4e73df;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        z-index: 2;
+      }
+
+      .back-btn:hover {
+        background: #2e59d9;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(78, 115, 223, 0.4);
+        color: white;
+        text-decoration: none;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin: 25px 0 15px;
+        color: #4e73df;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin: 20px 0 10px;
+        color: #2e59d9;
+      }
+
+      /* Search Section */
+      .search-section {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .search-heading {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .search-bar {
+        width: 100%;
+        display: flex;
+        margin-bottom: 20px;
+      }
+
+      .search-input {
+        flex-grow: 1;
+        padding: 15px;
+        font-size: 1.2rem;
+        border: 2px solid #ddd;
+        border-radius: 8px 0 0 8px;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .search-button {
+        background: linear-gradient(135deg, #4e73df, #764ba2);
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border-radius: 0 8px 8px 0;
+        transition: all 0.3s ease;
+      }
+
+      .search-button:hover {
+        background: linear-gradient(135deg, #2e59d9, #5a3d7a);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(78, 115, 223, 0.4);
+      }
+
+      /* Category Filter */
+      .category-filter {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+
+      .category-button {
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid #4e73df;
+        color: #4e73df;
+        padding: 10px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .category-button:hover,
+      .category-button.active {
+        background: linear-gradient(135deg, #4e73df, #764ba2);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+      }
+
+      .category-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+      }
+
+      .category-button:hover::before {
+        left: 100%;
+      }
+
+      /* Medication Grid */
+      .medications-heading {
+        text-align: center;
+        margin: 30px 0;
+      }
+
+      .medications-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 50px;
+      }
+
+      .medication-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border-left: 5px solid #4e73df;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .medication-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .medication-info {
+        padding: 20px;
+      }
+
+      .medication-name {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color: #4e73df;
+        font-weight: bold;
+      }
+
+      .medication-category {
+        display: inline-block;
+        background: linear-gradient(135deg, #4e73df, #764ba2);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+      }
+
+      .medication-description {
+        margin-bottom: 15px;
+        line-height: 1.6;
+      }
+
+      .medication-dosage {
+        font-weight: bold;
+        color: #2e59d9;
+      }
+
+      /* Loading Spinner */
+      .loading-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        width: 100%;
+      }
+
+      .loading-spinner {
+        display: none;
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(78, 115, 223, 0.3);
+        border-top: 5px solid #4e73df;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* No Results Message */
+      .no-results {
+        display: none;
+        text-align: center;
+        padding: 30px;
+        font-size: 1.2rem;
+        color: #666;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Pagination */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin: 40px 0;
+      }
+
+      .page-button {
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid #4e73df;
+        color: #4e73df;
+        padding: 10px 15px;
+        margin: 0 5px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .page-button:hover,
+      .page-button.active {
+        background: linear-gradient(135deg, #4e73df, #764ba2);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        overflow-y: auto;
+      }
+
+      .modal-content {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        margin: 50px auto;
+        padding: 30px;
+        width: 90%;
+        max-width: 800px;
+        border-radius: 20px;
+        position: relative;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #4e73df;
+        transition: color 0.3s ease;
+      }
+
+      .close-modal:hover {
+        color: #2e59d9;
+      }
+
+      .medication-detail-title {
+        font-size: 2rem;
+        color: #4e73df;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid rgba(78, 115, 223, 0.2);
+      }
+
+      .medication-details {
+        line-height: 1.8;
+      }
+
+      .detail-section {
+        margin-bottom: 20px;
+      }
+
+      .detail-section h4 {
+        font-size: 1.2rem;
+        color: #2e59d9;
+        margin-bottom: 10px;
+      }
+
+      /* Back to Top Button */
+      .back-to-top {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #4e73df, #764ba2);
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 10px 25px rgba(78, 115, 223, 0.3);
+        z-index: 100;
+        transition: all 0.3s ease;
+      }
+
+      .back-to-top:hover {
+        background: linear-gradient(135deg, #2e59d9, #5a3d7a);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(78, 115, 223, 0.4);
+      }
+
+      /* Footer */
+      .footer {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        margin-top: 50px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-logo {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #4e73df;
+      }
+
+      .footer-links {
+        margin-bottom: 20px;
+      }
+
+      .footer-links a {
+        color: #4e73df;
+        text-decoration: none;
+        margin: 0 15px;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: #2e59d9;
+      }
+
+      .footer-disclaimer {
+        max-width: 800px;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      /* Accessibility Features */
+      .accessibility-controls {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .text-size-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .size-button {
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid #4e73df;
+        color: #4e73df;
+        padding: 8px 15px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .size-button:hover {
+        background: linear-gradient(135deg, #4e73df, #764ba2);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+      }
+
+      .high-contrast-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .contrast-checkbox {
+        margin-right: 10px;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .medications-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .back-btn {
+          position: static;
+          margin-bottom: 20px;
+          align-self: flex-start;
+        }
+
+        .search-bar {
+          flex-direction: column;
+        }
+
+        .search-input {
+          border-radius: 8px;
+          margin-bottom: 10px;
+        }
+
+        .search-button {
+          border-radius: 8px;
+          width: 100%;
+        }
+
+        .category-filter {
+          gap: 8px;
+        }
+
+        .category-button {
+          padding: 8px 12px;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <a href="../dashboard.php" class="back-btn">
+          <span>←</span> Back
+        </a>
+        <h1>Tablet Info for Seniors</h1>
+        <p>Your Complete Guide to Common Medications</p>
+      </header>
+
+      <main>
+        <section class="search-section">
+          <div class="search-container">
+            <div class="search-heading">
+              <h2>Find Your Medication</h2>
+              <p>Search by medication name, condition, or category</p>
+            </div>
+
+            <div class="search-bar">
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Enter medication name..."
+                aria-label="Search for medication"
+              />
+              <button class="search-button">Search</button>
+            </div>
+
+            <div class="category-filter">
+              <button class="category-button active" data-category="all">All</button>
+              <button class="category-button" data-category="Heart & Blood Pressure">Heart & Blood Pressure</button>
+              <button class="category-button" data-category="Diabetes">Diabetes</button>
+              <button class="category-button" data-category="Pain Relief">Pain Relief</button>
+              <button class="category-button" data-category="Cholesterol">Cholesterol</button>
+              <button class="category-button" data-category="Thyroid">Thyroid</button>
+              <button class="category-button" data-category="Bone Health">Bone Health</button>
+              <button class="category-button" data-category="Digestive Health">Digestive Health</button>
+              <button class="category-button" data-category="Blood Thinners">Blood Thinners</button>
+              <button class="category-button" data-category="Mental Health">Mental Health</button>
+              <button class="category-button" data-category="Respiratory">Respiratory</button>
+              <button class="category-button" data-category="Urinary Health">Urinary Health</button>
+              <button class="category-button" data-category="Memory">Memory</button>
+              <button class="category-button" data-category="Sleep">Sleep</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="accessibility-controls">
+          <div class="text-size-controls">
+            <span>Text Size:</span>
+            <button class="size-button" onclick="decreaseTextSize()">A-</button>
+            <button class="size-button" onclick="resetTextSize()">Reset</button>
+            <button class="size-button" onclick="increaseTextSize()">A+</button>
+          </div>
+          <div class="high-contrast-toggle">
+            <input
+              type="checkbox"
+              id="contrast-toggle"
+              class="contrast-checkbox"
+              onclick="toggleContrast()"
+            />
+            <label for="contrast-toggle">High Contrast Mode</label>
+          </div>
+        </section>
+
+        <section>
+          <!-- Loading indicator -->
+          <div class="loading-container">
+            <div class="loading-spinner" id="loading-spinner"></div>
+          </div>
+
+          <!-- No results message -->
+          <div class="no-results" id="no-results-message">
+            No medications found matching your search criteria.
+          </div>
+
+        <div class="medications-grid" id="medications-container">
+          <!-- Medication 1 -->
+          <div class="medication-card" data-category="Heart & Blood Pressure">
+            <div class="medication-info">
+              <h3 class="medication-name">Lisinopril</h3>
+              <span class="medication-category">Heart & Blood Pressure</span>
+              <p class="medication-description">
+                An ACE inhibitor used to treat high blood pressure and heart
+                failure.
+              </p>
+              <p class="medication-dosage">Common dosage: 10-40mg once daily</p>
+            </div>
+          </div>
+
+          <!-- Medication 2 -->
+          <div class="medication-card" data-category="Diabetes">
+            <div class="medication-info">
+              <h3 class="medication-name">Metformin</h3>
+              <span class="medication-category">Diabetes</span>
+              <p class="medication-description">
+                First-line medication for the treatment of type 2 diabetes.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 500-1000mg twice daily
+              </p>
+            </div>
+          </div>
+
+          <!-- Medication 3 -->
+          <div class="medication-card" data-category="Pain Relief">
+            <div class="medication-info">
+              <h3 class="medication-name">Acetaminophen</h3>
+              <span class="medication-category">Pain Relief</span>
+              <p class="medication-description">
+                Used to treat mild to moderate pain and reduce fever.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 325-650mg every 4-6 hours
+              </p>
+            </div>
+          </div>
+
+          <!-- Medication 4 -->
+          <div class="medication-card" data-category="Cholesterol">
+            <div class="medication-info">
+              <h3 class="medication-name">Atorvastatin</h3>
+              <span class="medication-category">Cholesterol</span>
+              <p class="medication-description">
+                Statin medication used to prevent cardiovascular disease and
+                treat abnormal lipid levels.
+              </p>
+              <p class="medication-dosage">Common dosage: 10-80mg once daily</p>
+            </div>
+          </div>
+
+          <!-- Medication 5 -->
+          <div class="medication-card" data-category="Heart & Blood Pressure">
+            <div class="medication-info">
+              <h3 class="medication-name">Amlodipine</h3>
+              <span class="medication-category">Heart & Blood Pressure</span>
+              <p class="medication-description">
+                Calcium channel blocker used to treat high blood pressure and
+                coronary artery disease.
+              </p>
+              <p class="medication-dosage">Common dosage: 5-10mg once daily</p>
+            </div>
+          </div>
+
+          <!-- Medication 6 -->
+          <div class="medication-card" data-category="Thyroid">
+            <div class="medication-info">
+              <h3 class="medication-name">Levothyroxine</h3>
+              <span class="medication-category">Thyroid</span>
+              <p class="medication-description">
+                Replacement for a hormone normally produced by your thyroid
+                gland to regulate the body's energy and metabolism.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 25-200mcg once daily
+              </p>
+            </div>
+          </div>
+
+          <!-- Medication 7 -->
+          <div class="medication-card" data-category="Bone Health">
+            <div class="medication-info">
+              <h3 class="medication-name">Alendronate</h3>
+              <span class="medication-category">Bone Health</span>
+              <p class="medication-description">
+                Bisphosphonate medication used to treat osteoporosis and similar
+                diseases.
+              </p>
+              <p class="medication-dosage">Common dosage: 70mg once weekly</p>
+            </div>
+          </div>
+
+          <!-- Medication 8 -->
+          <div class="medication-card" data-category="Heart & Blood Pressure">
+            <div class="medication-info">
+              <h3 class="medication-name">Losartan</h3>
+              <span class="medication-category">Heart & Blood Pressure</span>
+              <p class="medication-description">
+                Angiotensin II receptor blocker used to treat high blood
+                pressure and diabetic kidney disease.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 25-100mg once daily
+              </p>
+            </div>
+          </div>
+
+          <!-- Medication 9 -->
+          <div class="medication-card" data-category="Cholesterol">
+            <div class="medication-info">
+              <h3 class="medication-name">Simvastatin</h3>
+              <span class="medication-category">Cholesterol</span>
+              <p class="medication-description">
+                Statin medication that lowers cholesterol and reduces risk of
+                heart attack and stroke.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 10-40mg once daily at bedtime
+              </p>
+            </div>
+          </div>
+
+          <!-- Medication 10 -->
+          <div class="medication-card" data-category="Digestive Health">
+            <div class="medication-info">
+              <h3 class="medication-name">Omeprazole</h3>
+              <span class="medication-category">Digestive Health</span>
+              <p class="medication-description">
+                Proton pump inhibitor that decreases the amount of acid produced
+                in the stomach.
+              </p>
+              <p class="medication-dosage">Common dosage: 20-40mg once daily</p>
+            </div>
+          </div>
+
+          <!-- Medication 11 -->
+          <div class="medication-card" data-category="Blood Thinners">
+            <div class="medication-info">
+              <h3 class="medication-name">Warfarin</h3>
+              <span class="medication-category">Blood Thinners</span>
+              <p class="medication-description">
+                Anticoagulant that prevents blood clots from forming or growing
+                larger.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 2-10mg once daily (varies widely)
+              </p>
+            </div>
+          </div>
+
+          <!-- Medication 12 -->
+          <div class="medication-card" data-category="Pain Relief">
+            <div class="medication-info">
+              <h3 class="medication-name">Gabapentin</h3>
+              <span class="medication-category">Pain Relief</span>
+              <p class="medication-description">
+                Used to treat nerve pain and seizures.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 300-600mg three times daily
+              </p>
+            </div>
+          </div>
+
+          <!-- Medication 13 -->
+          <div class="medication-card" data-category="Heart & Blood Pressure">
+            <div class="medication-info">
+              <h3 class="medication-name">Hydrochlorothiazide</h3>
+              <span class="medication-category">Heart & Blood Pressure</span>
+              <p class="medication-description">
+                Diuretic that treats fluid retention and high blood pressure.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 12.5-50mg once daily
+              </p>
+            </div>
+          </div>
+
+          <!-- Medication 14 -->
+          <div class="medication-card" data-category="Mental Health">
+            <div class="medication-info">
+              <h3 class="medication-name">Sertraline</h3>
+              <span class="medication-category">Mental Health</span>
+              <p class="medication-description">
+                SSRI antidepressant used to treat depression, anxiety, and other
+                conditions.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 50-200mg once daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 15 -->
+          <div class="medication-card" data-category="Mental Health">
+            <div class="medication-info">
+              <h3 class="medication-name">Citalopram</h3>
+              <span class="medication-category">Mental Health</span>
+              <p class="medication-description">
+                SSRI antidepressant that helps restore the balance of serotonin in the brain.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 10-40mg once daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 16 -->
+          <div class="medication-card" data-category="Blood Thinners">
+            <div class="medication-info">
+              <h3 class="medication-name">Apixaban</h3>
+              <span class="medication-category">Blood Thinners</span>
+              <p class="medication-description">
+                Newer anticoagulant used to prevent blood clots and reduce stroke risk.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 5mg twice daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 17 -->
+          <div class="medication-card" data-category="Respiratory">
+            <div class="medication-info">
+              <h3 class="medication-name">Albuterol</h3>
+              <span class="medication-category">Respiratory</span>
+              <p class="medication-description">
+                Bronchodilator that relaxes muscles in the airways to improve breathing.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 1-2 inhalations every 4-6 hours as needed
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 18 -->
+          <div class="medication-card" data-category="Sleep">
+            <div class="medication-info">
+              <h3 class="medication-name">Zolpidem</h3>
+              <span class="medication-category">Sleep</span>
+              <p class="medication-description">
+                Short-term treatment for insomnia, helps fall asleep faster.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 5-10mg at bedtime
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 19 -->
+          <div class="medication-card" data-category="Heart & Blood Pressure">
+            <div class="medication-info">
+              <h3 class="medication-name">Metoprolol</h3>
+              <span class="medication-category">Heart & Blood Pressure</span>
+              <p class="medication-description">
+                Beta-blocker that treats high blood pressure, chest pain, and heart failure.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 25-100mg twice daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 20 -->
+          <div class="medication-card" data-category="Digestive Health">
+            <div class="medication-info">
+              <h3 class="medication-name">Famotidine</h3>
+              <span class="medication-category">Digestive Health</span>
+              <p class="medication-description">
+                H2 blocker that reduces stomach acid production to treat heartburn and GERD.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 20-40mg once or twice daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 21 -->
+          <div class="medication-card" data-category="Diabetes">
+            <div class="medication-info">
+              <h3 class="medication-name">Glipizide</h3>
+              <span class="medication-category">Diabetes</span>
+              <p class="medication-description">
+                Sulfonylurea medication that stimulates insulin release to lower blood sugar.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 5-20mg once or twice daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 22 -->
+          <div class="medication-card" data-category="Memory">
+            <div class="medication-info">
+              <h3 class="medication-name">Donepezil</h3>
+              <span class="medication-category">Memory</span>
+              <p class="medication-description">
+                Used to treat dementia associated with Alzheimer's disease.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 5-10mg once daily at bedtime
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 23 -->
+          <div class="medication-card" data-category="Pain Relief">
+            <div class="medication-info">
+              <h3 class="medication-name">Naproxen</h3>
+              <span class="medication-category">Pain Relief</span>
+              <p class="medication-description">
+                NSAID that reduces inflammation and relieves pain from arthritis and other conditions.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 220-500mg twice daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 24 -->
+          <div class="medication-card" data-category="Urinary Health">
+            <div class="medication-info">
+              <h3 class="medication-name">Tamsulosin</h3>
+              <span class="medication-category">Urinary Health</span>
+              <p class="medication-description">
+                Alpha-blocker that relaxes prostate and bladder muscles to improve urination.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 0.4mg once daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 25 -->
+          <div class="medication-card" data-category="Respiratory">
+            <div class="medication-info">
+              <h3 class="medication-name">Fluticasone</h3>
+              <span class="medication-category">Respiratory</span>
+              <p class="medication-description">
+                Corticosteroid nasal spray that treats allergy symptoms and breathing problems.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 1-2 sprays in each nostril daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 26 -->
+          <div class="medication-card" data-category="Heart & Blood Pressure">
+            <div class="medication-info">
+              <h3 class="medication-name">Carvedilol</h3>
+              <span class="medication-category">Heart & Blood Pressure</span>
+              <p class="medication-description">
+                Beta-blocker that treats high blood pressure, heart failure, and prevents heart attacks.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 3.125-25mg twice daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 27 -->
+          <div class="medication-card" data-category="Bone Health">
+            <div class="medication-info">
+              <h3 class="medication-name">Calcium + Vitamin D</h3>
+              <span class="medication-category">Bone Health</span>
+              <p class="medication-description">
+                Supplement that helps maintain bone density and prevent osteoporosis.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 500-600mg calcium with 400-800 IU vitamin D twice daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 28 -->
+          <div class="medication-card" data-category="Mental Health">
+            <div class="medication-info">
+              <h3 class="medication-name">Escitalopram</h3>
+              <span class="medication-category">Mental Health</span>
+              <p class="medication-description">
+                SSRI antidepressant used to treat depression and generalized anxiety disorder.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 10-20mg once daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 29 -->
+          <div class="medication-card" data-category="Digestive Health">
+            <div class="medication-info">
+              <h3 class="medication-name">Pantoprazole</h3>
+              <span class="medication-category">Digestive Health</span>
+              <p class="medication-description">
+                Proton pump inhibitor that treats acid reflux, GERD, and stomach ulcers.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 40mg once daily
+              </p>
+            </div>
+          </div>
+          
+          <!-- Medication 30 -->
+          <div class="medication-card" data-category="Sleep">
+            <div class="medication-info">
+              <h3 class="medication-name">Melatonin</h3>
+              <span class="medication-category">Sleep</span>
+              <p class="medication-description">
+                Supplement that helps regulate sleep-wake cycles and improve sleep quality.
+              </p>
+              <p class="medication-dosage">
+                Common dosage: 1-5mg taken 30 minutes before bedtime
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Pagination controls -->
+        <div class="pagination">
+          <button class="page-button active" data-page="1">1</button>
+          <button class="page-button" data-page="2">2</button>
+          <button class="page-button" data-page="3">3</button>
+          <button class="page-button" data-page="next">Next &raquo;</button>
+        </div>
+      </section>
+    </main>
+    
+    <!-- Modal for medication details -->
+    <div id="medication-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 class="medication-detail-title" id="modal-title">Medication Name</h2>
+        <div class="medication-details">
+          <div class="detail-section">
+            <h4>Description</h4>
+            <p id="modal-description">Medication description goes here.</p>
+          </div>
+          <div class="detail-section">
+            <h4>How to Take</h4>
+            <p id="modal-usage">Instructions on how to take this medication.</p>
+          </div>
+          <div class="detail-section">
+            <h4>Common Side Effects</h4>
+            <p id="modal-side-effects">Common side effects information.</p>
+          </div>
+          <div class="detail-section">
+            <h4>Special Precautions</h4>
+            <p id="modal-precautions">Precautions and warnings.</p>
+          </div>
+          <div class="detail-section">
+            <h4>Storage Instructions</h4>
+            <p id="modal-storage">How to properly store this medication.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Back to top button -->
+    <div class="back-to-top" id="back-to-top">&#8679;</div>
+    
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">Tablet Info for Seniors</div>
+          <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+          </div>
+          <div class="footer-disclaimer">
+            <p>
+              Disclaimer: This website provides general information about
+              medications commonly prescribed for seniors. The information is
+              not medical advice and should not replace consultation with
+              healthcare professionals. Always consult your doctor or pharmacist
+              for personalized advice about your medications.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <script>
+      // DOM Elements
+      const searchInput = document.querySelector('.search-input');
+      const searchButton = document.querySelector('.search-button');
+      const categoryButtons = document.querySelectorAll('.category-button');
+      const medicationCards = document.querySelectorAll('.medication-card');
+      const paginationButtons = document.querySelectorAll('.page-button');
+      const loadingSpinner = document.getElementById('loading-spinner');
+      const noResultsMessage = document.getElementById('no-results-message');
+      const backToTopButton = document.getElementById('back-to-top');
+      const modal = document.getElementById('medication-modal');
+      const closeModalButton = document.querySelector('.close-modal');
+      
+      // Medication details for modal (would typically come from a database)
+      const medicationDetails = {
+        "Lisinopril": {
+          description: "Lisinopril is an ACE inhibitor that works by relaxing blood vessels so blood can flow more easily.",
+          usage: "Take this medication by mouth with or without food as directed by your doctor, usually once daily. Take it at the same time each day.",
+          sideEffects: "Dizziness, headache, dry cough, and increased potassium levels in the blood.",
+          precautions: "May cause harm to an unborn baby. Not recommended during pregnancy. May increase risk of severe allergic reactions.",
+          storage: "Store at room temperature away from light and moisture. Do not store in the bathroom."
+        },
+        "Metformin": {
+          description: "Metformin is a biguanide antidiabetic that improves glucose tolerance in patients with type 2 diabetes.",
+          usage: "Take with meals to minimize stomach upset. Start with a low dose and gradually increase as directed by your doctor.",
+          sideEffects: "Nausea, vomiting, stomach upset, diarrhea, weakness, or a metallic taste in the mouth.",
+          precautions: "Should not be used by people with kidney problems or heart failure. Avoid excessive alcohol use.",
+          storage: "Store at room temperature away from moisture, heat, and light."
+        },
+        "Acetaminophen": {
+          description: "Acetaminophen is a pain reliever and fever reducer used to treat many conditions such as headache, muscle aches, arthritis, and fever.",
+          usage: "Take as directed. Do not exceed the recommended dosage as it may cause liver damage.",
+          sideEffects: "Few side effects when taken as directed. Rarely may cause allergic reactions or liver damage with overuse.",
+          precautions: "Do not use with other acetaminophen-containing products. Limit alcohol consumption while taking this medication.",
+          storage: "Store at room temperature away from moisture and heat."
+        }
+        // Additional medication details would be included here
+      };
+      
+      // Current state
+      let currentCategory = 'all';
+      let currentPage = 1;
+      const itemsPerPage = 12;
+      
+      // Initialize the page
+      function init() {
+        // Set up event listeners
+        searchButton.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            performSearch();
+          }
+        });
+        
+        categoryButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            currentCategory = this.dataset.category;
+            currentPage = 1;
+            filterMedications();
+          });
+        });
+        
+        medicationCards.forEach(card => {
+          card.addEventListener('click', function() {
+            const medicationName = this.querySelector('.medication-name').textContent;
+            openMedicationModal(medicationName);
+          });
+        });
+        
+        paginationButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const page = this.dataset.page;
+            if (page === 'next') {
+              currentPage++;
+            } else {
+              currentPage = parseInt(page);
+            }
+            updatePagination();
+            filterMedications();
+          });
+        });
+        
+        closeModalButton.addEventListener('click', function() {
+          modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(event) {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+        
+        window.addEventListener('scroll', function() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.style.display = 'block';
+          } else {
+            backToTopButton.style.display = 'none';
+          }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+        
+        // Initial filtering
+        filterMedications();
+      }
+      
+      // Filter medications based on category and search term
+      function filterMedications() {
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        // Show loading spinner
+        loadingSpinner.style.display = 'block';
+        
+        // Simulate loading delay
+        setTimeout(() => {
+          let visibleCount = 0;
+          
+          medicationCards.forEach((card, index) => {
+            const cardCategory = card.dataset.category;
+            const cardName = card.querySelector('.medication-name').textContent.toLowerCase();
+            const cardDescription = card.querySelector('.medication-description').textContent.toLowerCase();
+            
+            const matchesCategory = currentCategory === 'all' || cardCategory === currentCategory;
+            const matchesSearch = searchTerm === '' || 
+                                   cardName.includes(searchTerm) || 
+                                   cardDescription.includes(searchTerm);
+            
+            const isVisible = matchesCategory && matchesSearch;
+            
+            // Pagination logic
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage - 1;
+            
+            if (isVisible) {
+              visibleCount++;
+              const isInCurrentPage = visibleCount > startIndex && visibleCount <= endIndex + 1;
+              card.style.display = isInCurrentPage ? 'block' : 'none';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+          
+          // Show no results message if needed
+          noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+          
+          // Hide loading spinner
+          loadingSpinner.style.display = 'none';
+          
+          // Update pagination
+          updatePagination(visibleCount);
+        }, 300);
+      }
+      
+      // Perform search when search button is clicked
+      function performSearch() {
+        currentPage = 1;
+        filterMedications();
+      }
+      
+      // Update pagination buttons based on results
+      function updatePagination(totalItems = 0) {
+        const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+        
+        paginationButtons.forEach(button => {
+          const page = button.dataset.page;
+          
+          if (page === 'next') {
+            button.style.display = currentPage < totalPages ? 'inline-block' : 'none';
+          } else {
+            const pageNum = parseInt(page);
+            button.style.display = pageNum <= totalPages ? 'inline-block' : 'none';
+            button.classList.toggle('active', currentPage === pageNum);
+          }
+        });
+      }
+      
+      // Open medication detail modal
+      function openMedicationModal(medicationName) {
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalUsage = document.getElementById('modal-usage');
+        const modalSideEffects = document.getElementById('modal-side-effects');
+        const modalPrecautions = document.getElementById('modal-precautions');
+        const modalStorage = document.getElementById('modal-storage');
+        
+        modalTitle.textContent = medicationName;
+        
+        // Check if we have detailed info for this medication
+        if (medicationDetails[medicationName]) {
+          const details = medicationDetails[medicationName];
+          modalDescription.textContent = details.description;
+          modalUsage.textContent = details.usage;
+          modalSideEffects.textContent = details.sideEffects;
+          modalPrecautions.textContent = details.precautions;
+          modalStorage.textContent = details.storage;
+        } else {
+          // Generic information if medication details not available
+          modalDescription.textContent = `${medicationName} is a medication commonly prescribed for seniors.`;
+          modalUsage.textContent = "Take as directed by your doctor. Do not change your dosage without consulting your healthcare provider.";
+          modalSideEffects.textContent = "All medications may cause side effects. Consult your doctor if you experience any unusual symptoms.";
+          modalPrecautions.textContent = "Tell your doctor about all medications you are taking and any medical conditions you have.";
+          modalStorage.textContent = "Store at room temperature away from moisture and heat unless directed otherwise.";
+        }
+        
+        modal.style.display = 'block';
+      }
+      
+      // Accessibility functions
+      let currentFontSize = 18; // Starting font size in px
+      
+      function increaseTextSize() {
+        if (currentFontSize < 24) {
+          currentFontSize += 2;
+          document.body.style.fontSize = currentFontSize + 'px';
+        }
+      }
+      
+      function decreaseTextSize() {
+        if (currentFontSize > 14) {
+          currentFontSize -= 2;
+          document.body.style.fontSize = currentFontSize + 'px';
+        }
+      }
+      
+      function resetTextSize() {
+        currentFontSize = 18;
+        document.body.style.fontSize = currentFontSize + 'px';
+      }
+      
+      function toggleContrast() {
+        document.body.classList.toggle('high-contrast');
+      }
+      
+      // Initialize the page when DOM is loaded
+      document.addEventListener('DOMContentLoaded', init);
+    </script>
+  </body>
+</html>

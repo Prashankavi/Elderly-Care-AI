@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MedBot Chat</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f0f0f0; }
+    .chatbox { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    .msg { margin: 10px 0; }
+    .user { font-weight: bold; color: blue; }
+    .bot { color: green; }
+  </style>
+</head>
+<body>
+  <div class="chatbox">
+    <h2>🩺 Chat with MedBot</h2>
+    <div id="chat"></div>
+    <input type="text" id="msg" placeholder="Type your message..." style="width: 80%;">
+    <button onclick="send()">Send</button>
+  </div>
+  <script>
+    async function send() {
+      let msg = document.getElementById("msg").value;
+      if (!msg.trim()) return;
+      document.getElementById("chat").innerHTML += `<div class='msg user'>${msg}</div>`;
+      let res = await fetch("/ask", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: msg})
+      });
+      let data = await res.json();
+      document.getElementById("chat").innerHTML += `<div class='msg bot'>Bot: ${data.response}</div>`;
+      document.getElementById("msg").value = "";
+    }
+  </script>
+</body>
+</html>

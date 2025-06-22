@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Guidance - Mind, Body & Soul Wellness Blog</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(103, 58, 183, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #673ab7;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #673ab7;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .back-btn:hover {
+            background: #512da8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(103, 58, 183, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .blog-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #673ab7, #9c27b0);
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+
+        .blog-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .blog-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .benefits-list li {
+            padding: 5px 0;
+            border-left: 3px solid #673ab7;
+            padding-left: 15px;
+            margin-bottom: 8px;
+            background: rgba(103, 58, 183, 0.05);
+            border-radius: 5px;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .beginner {
+            background: #4caf50;
+            color: white;
+        }
+
+        .intermediate {
+            background: #ff9800;
+            color: white;
+        }
+
+        .advanced {
+            background: #f44336;
+            color: white;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #673ab7;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #512da8;
+            transform: translateX(5px);
+        }
+
+        /* Categories Section */
+        .categories {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .categories h2 {
+            color: #673ab7;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .category-tag {
+            background: linear-gradient(135deg, #673ab7, #9c27b0);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(103, 58, 183, 0.3);
+            color: white;
+        }
+
+        .category-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .category-tag:hover::before {
+            left: 100%;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer h3 {
+            color: #673ab7;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .back-btn {
+                position: static;
+                margin-bottom: 20px;
+                align-self: flex-start;
+            }
+
+            .category-tags {
+                gap: 10px;
+            }
+
+            .category-tag {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #673ab7;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(103, 58, 183, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: #512da8;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(103, 58, 183, 0.4);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="../dashboard.php" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+            <h1><i class="fas fa-pray"></i> Yoga Guidance</h1>
+            <p>Transform your mind, body, and soul through the ancient practice of yoga</p>
+        </div>
+
+        <div class="categories">
+            <h2>Browse by Practice Type</h2>
+            <div class="category-tags">
+                <a href="#" class="category-tag"><i class="fas fa-seedling"></i> Beginner</a>
+                <a href="#" class="category-tag"><i class="fas fa-mountain"></i> Intermediate</a>
+                <a href="#" class="category-tag"><i class="fas fa-fire"></i> Advanced</a>
+                <a href="#" class="category-tag"><i class="fas fa-heart"></i> Restorative</a>
+                <a href="#" class="category-tag"><i class="fas fa-sun"></i> Morning</a>
+                <a href="#" class="category-tag"><i class="fas fa-moon"></i> Evening</a>
+            </div>
+        </div>
+
+        <div class="blog-grid">
+            <!-- 1. Sun Salutation -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-sun blog-icon"></i>
+                    <div class="blog-title">Sun Salutation (Surya Namaskara)</div>
+                    <div class="blog-subtitle">The foundation of all yoga practice</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge beginner">Beginner Friendly</span>
+                    <p class="blog-excerpt">
+                        A sequence of 12 yoga poses that flow together to create a complete body workout while honoring the sun's energy.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Improves flexibility and strength</li>
+                        <li><i class="fas fa-check-circle"></i> Boosts cardiovascular health</li>
+                        <li><i class="fas fa-check-circle"></i> Enhances mental focus</li>
+                        <li><i class="fas fa-check-circle"></i> Energizes the entire body</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. Pranayama -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-wind blog-icon"></i>
+                    <div class="blog-title">Pranayama (Breath Control)</div>
+                    <div class="blog-subtitle">Master the art of conscious breathing</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge beginner">Beginner Friendly</span>
+                    <p class="blog-excerpt">
+                        Ancient breathing techniques that regulate life force energy, reduce stress, and promote inner peace.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Reduces anxiety and stress</li>
+                        <li><i class="fas fa-check-circle"></i> Improves lung capacity</li>
+                        <li><i class="fas fa-check-circle"></i> Enhances concentration</li>
+                        <li><i class="fas fa-check-circle"></i> Balances nervous system</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3. Mountain Pose -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-mountain blog-icon"></i>
+                    <div class="blog-title">Mountain Pose (Tadasana)</div>
+                    <div class="blog-subtitle">The foundation of all standing poses</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge beginner">Beginner</span>
+                    <p class="blog-excerpt">
+                        A fundamental standing pose that teaches proper alignment and helps develop awareness of posture.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Improves posture and alignment</li>
+                        <li><i class="fas fa-check-circle"></i> Strengthens legs and core</li>
+                        <li><i class="fas fa-check-circle"></i> Increases body awareness</li>
+                        <li><i class="fas fa-check-circle"></i> Builds confidence and stability</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4. Warrior Poses -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-shield-alt blog-icon"></i>
+                    <div class="blog-title">Warrior Poses (Virabhadrasana)</div>
+                    <div class="blog-subtitle">Build strength and inner warrior spirit</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge intermediate">Intermediate</span>
+                    <p class="blog-excerpt">
+                        A series of powerful standing poses that build strength, stability, and confidence while honoring the warrior within.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Strengthens legs and arms</li>
+                        <li><i class="fas fa-check-circle"></i> Improves balance and focus</li>
+                        <li><i class="fas fa-check-circle"></i> Opens hips and chest</li>
+                        <li><i class="fas fa-check-circle"></i> Builds mental resilience</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. Downward Dog -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-dog blog-icon"></i>
+                    <div class="blog-title">Downward Dog (Adho Mukha Svanasana)</div>
+                    <div class="blog-subtitle">The most recognized yoga pose worldwide</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge beginner">Beginner</span>
+                    <p class="blog-excerpt">
+                        An energizing pose that stretches and strengthens the entire body while calming the mind.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Stretches hamstrings and calves</li>
+                        <li><i class="fas fa-check-circle"></i> Strengthens arms and shoulders</li>
+                        <li><i class="fas fa-check-circle"></i> Improves circulation</li>
+                        <li><i class="fas fa-check-circle"></i> Relieves stress and fatigue</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 6. Child's Pose -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-baby blog-icon"></i>
+                    <div class="blog-title">Child's Pose (Balasana)</div>
+                    <div class="blog-subtitle">A gentle resting pose for restoration</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge beginner">Beginner</span>
+                    <p class="blog-excerpt">
+                        A restorative pose that provides a sense of safety and calm while gently stretching the hips and spine.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Reduces stress and anxiety</li>
+                        <li><i class="fas fa-check-circle"></i> Stretches hips and thighs</li>
+                        <li><i class="fas fa-check-circle"></i> Relieves back pain</li>
+                        <li><i class="fas fa-check-circle"></i> Calms the nervous system</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 7. Tree Pose -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-tree blog-icon"></i>
+                    <div class="blog-title">Tree Pose (Vrikshasana)</div>
+                    <div class="blog-subtitle">Find balance and root down to rise up</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge beginner">Beginner</span>
+                    <p class="blog-excerpt">
+                        A standing balance pose that improves focus and stability while connecting you to nature's grounding energy.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Improves balance and coordination</li>
+                        <li><i class="fas fa-check-circle"></i> Strengthens legs and core</li>
+                        <li><i class="fas fa-check-circle"></i> Enhances concentration</li>
+                        <li><i class="fas fa-check-circle"></i> Opens hips and stretches inner thighs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 8. Cobra Pose -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-snake blog-icon"></i>
+                    <div class="blog-title">Cobra Pose (Bhujangasana)</div>
+                    <div class="blog-subtitle">Open your heart and strengthen your back</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge beginner">Beginner</span>
+                    <p class="blog-excerpt">
+                        A gentle backbend that opens the chest and heart while strengthening the spine and back muscles.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Strengthens spine and back muscles</li>
+                        <li><i class="fas fa-check-circle"></i> Opens chest and shoulders</li>
+                        <li><i class="fas fa-check-circle"></i> Improves posture</li>
+                        <li><i class="fas fa-check-circle"></i> Stimulates digestive organs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 9. Triangle Pose -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-shapes blog-icon"></i>
+                    <div class="blog-title">Triangle Pose (Trikonasana)</div>
+                    <div class="blog-subtitle">Create length and strength through geometry</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge intermediate">Intermediate</span>
+                    <p class="blog-excerpt">
+                        A standing pose that creates a beautiful triangle shape while stretching and strengthening multiple muscle groups.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Stretches hamstrings and hips</li>
+                        <li><i class="fas fa-check-circle"></i> Strengthens legs and core</li>
+                        <li><i class="fas fa-check-circle"></i> Improves balance and stability</li>
+                        <li><i class="fas fa-check-circle"></i> Opens chest and shoulders</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 10. Seated Forward Fold -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-user-ninja blog-icon"></i>
+                    <div class="blog-title">Seated Forward Fold (Paschimottanasana)</div>
+                    <div class="blog-subtitle">Turn inward and find inner peace</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge beginner">Beginner</span>
+                    <p class="blog-excerpt">
+                        A calming seated pose that stretches the entire back of the body while encouraging introspection.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Stretches spine and hamstrings</li>
+                        <li><i class="fas fa-check-circle"></i> Calms the mind and nervous system</li>
+                        <li><i class="fas fa-check-circle"></i> Improves digestion</li>
+                        <li><i class="fas fa-check-circle"></i> Reduces stress and fatigue</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 11. Bridge Pose -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-bridge blog-icon"></i>
+                    <div class="blog-title">Bridge Pose (Setu Bandhasana)</div>
+                    <div class="blog-subtitle">Build bridges between earth and sky</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge beginner">Beginner</span>
+                    <p class="blog-excerpt">
+                        An energizing backbend that opens the heart while strengthening the legs, glutes, and core muscles.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Strengthens back and glutes</li>
+                        <li><i class="fas fa-check-circle"></i> Opens chest and hip flexors</li>
+                        <li><i class="fas fa-check-circle"></i> Improves spinal flexibility</li>
+                        <li><i class="fas fa-check-circle"></i> Energizes and uplifts mood</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 12. Pigeon Pose -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-dove blog-icon"></i>
+                    <div class="blog-title">Pigeon Pose (Eka Pada Rajakapotasana)</div>
+                    <div class="blog-subtitle">Deep hip opening for emotional release</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge intermediate">Intermediate</span>
+                    <p class="blog-excerpt">
+                        An intense hip-opening pose that releases stored tension and emotions while improving flexibility.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Deep hip flexor stretch</li>
+                        <li><i class="fas fa-check-circle"></i> Releases emotional tension</li>
+                        <li><i class="fas fa-check-circle"></i> Improves hip mobility</li>
+                        <li><i class="fas fa-check-circle"></i> Prepares for backbends</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 13. Crow Pose -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-crow blog-icon"></i>
+                    <div class="blog-title">Crow Pose (Bakasana)</div>
+                    <div class="blog-subtitle">Build arm strength and mental focus</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge advanced">Advanced</span>
+                    <p class="blog-excerpt">
+                        An arm balance that challenges strength and balance while building confidence and mental focus.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Strengthens arms and wrists</li>
+                        <li><i class="fas fa-check-circle"></i> Improves balance and coordination</li>
+                        <li><i class="fas fa-check-circle"></i> Builds core strength</li>
+                        <li><i class="fas fa-check-circle"></i> Increases mental focus</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 14. Headstand -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-user-astronaut blog-icon"></i>
+                    <div class="blog-title">Headstand (Sirsasana)</div>
+                    <div class="blog-subtitle">The king of all yoga poses</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge advanced">Advanced</span>
+                    <p class="blog-excerpt">
+                        Known as the king of poses, headstand provides numerous benefits while requiring strength, balance, and patience.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Improves circulation</li>
+                        <li><i class="fas fa-check-circle"></i> Strengthens core and shoulders</li>
+                        <li><i class="fas fa-check-circle"></i> Calms the nervous system</li>
+                        <li><i class="fas fa-check-circle"></i> Builds mental confidence</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 15. Lotus Pose -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-spa blog-icon"></i>
+                    <div class="blog-title">Lotus Pose (Padmasana)</div>
+                    <div class="blog-subtitle">The ultimate meditation seat</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge advanced">Advanced</span>
+                    <p class="blog-excerpt">
+                        A traditional seated pose for meditation that requires significant hip flexibility and creates inner calm.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Improves posture and spine alignment</li>
+                        <li><i class="fas fa-check-circle"></i> Calms the mind for meditation</li>
+                        <li><i class="fas fa-check-circle"></i> Increases hip flexibility</li>
+                        <li><i class="fas fa-check-circle"></i> Grounds and centers energy</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 16. Corpse Pose -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-bed blog-icon"></i>
+                    <div class="blog-title">Corpse Pose (Savasana)</div>
+                    <div class="blog-subtitle">The most important pose of practice</div>
+                </div>
+                <div class="blog-content">
+                    <span class="difficulty-badge beginner">Beginner</span>
+                    <p class="blog-excerpt">
+                        The final relaxation pose that integrates the benefits of practice and allows complete rest and restoration.
+                    </p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Deep relaxation and stress relief</li>
+                        <li><i class="fas fa-check-circle"></i> Integrates practice benefits</li>
+                        <li><i class="fas fa-check-circle"></i> Lowers blood pressure</li>
+                        <li><i class="fas fa-check-circle"></i> Promotes better sleep</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <h3>Stay Informed, Stay Healthy</h3>
+            <p>Regular check-ups and early detection are key to managing age-related health issues. Consult with healthcare professionals for personalized advice.</p>
+        </div>
+    </div>
+
+    <a href="#" class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Scroll to top functionality
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        document.getElementById('scrollTop').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Card expansion functionality
+        function expandCard(card) {
+            // Add a subtle animation when card is clicked
+            card.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                card.style.transform = 'scale(1)';
+            }, 150);
+            
+            // You can add more functionality here like opening a modal or navigating to a detailed page
+            console.log('Card clicked:', card.querySelector('.blog-title').textContent);
+        }
+
+        // Add click animation to category tags
+        document.querySelectorAll('.category-tag').forEach(tag => {
+            tag.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Add entrance animation
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.blog-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
+
+            

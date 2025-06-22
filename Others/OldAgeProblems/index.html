@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Old Age Problems - Health & Wellness Blog</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(78, 115, 223, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #4e73df;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #4e73df;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .back-btn:hover {
+            background: #2e59d9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 115, 223, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .blog-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #4e73df, #764ba2);
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+
+        .blog-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .blog-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .symptoms-list {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .symptoms-list li {
+            padding: 5px 0;
+            border-left: 3px solid #4e73df;
+            padding-left: 15px;
+            margin-bottom: 8px;
+            background: rgba(78, 115, 223, 0.05);
+            border-radius: 5px;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #4e73df;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #2e59d9;
+            transform: translateX(5px);
+        }
+
+        /* Categories Section */
+        .categories {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .categories h2 {
+            color: #4e73df;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .category-tag {
+            background: linear-gradient(135deg, #4e73df, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(78, 115, 223, 0.3);
+            color: white;
+        }
+
+        .category-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .category-tag:hover::before {
+            left: 100%;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer h3 {
+            color: #4e73df;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .back-btn {
+                position: static;
+                margin-bottom: 20px;
+                align-self: flex-start;
+            }
+
+            .category-tags {
+                gap: 10px;
+            }
+
+            .category-tag {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(78, 115, 223, 0.3);
+            border-radius: 50%;
+            border-top-color: #4e73df;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #4e73df;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: #2e59d9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(78, 115, 223, 0.4);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="../dashboard.php" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+            <h1><i class="fas fa-user-clock"></i> Common Old Age Problems</h1>
+            <p>Understanding and managing health challenges in golden years</p>
+        </div>
+
+        <div class="categories">
+            <h2>Browse by Category</h2>
+            <div class="category-tags">
+                <a href="#" class="category-tag"><i class="fas fa-heart"></i> Cardiovascular</a>
+                <a href="#" class="category-tag"><i class="fas fa-bone"></i> Bone Health</a>
+                <a href="#" class="category-tag"><i class="fas fa-brain"></i> Mental Health</a>
+                <a href="#" class="category-tag"><i class="fas fa-eye"></i> Vision</a>
+                <a href="#" class="category-tag"><i class="fas fa-ear-listen"></i> Hearing</a>
+                <a href="#" class="category-tag"><i class="fas fa-lungs"></i> Respiratory</a>
+            </div>
+        </div>
+
+        <div class="blog-grid">
+            <!-- 1. Hypertension -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-heart blog-icon"></i>
+                    <div class="blog-title">Hypertension (High Blood Pressure)</div>
+                    <div class="blog-subtitle">Silent killer affecting millions of seniors</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        High blood pressure affects nearly 75% of adults over 65. Often called the "silent killer," it can lead to serious complications if left untreated.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Headaches and dizziness</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Shortness of breath</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Chest pain</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Nosebleeds</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. Osteoporosis -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-bone blog-icon"></i>
+                    <div class="blog-title">Osteoporosis</div>
+                    <div class="blog-subtitle">Bone density loss and fracture risks</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Osteoporosis weakens bones, making them fragile and more likely to break. It's especially common in women after menopause.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Back pain from vertebral fractures</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Loss of height over time</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Stooped posture</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Bones that break easily</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3. Dementia & Alzheimer's -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-brain blog-icon"></i>
+                    <div class="blog-title">Dementia & Alzheimer's</div>
+                    <div class="blog-subtitle">Memory loss and cognitive decline</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Dementia affects memory, thinking, and social abilities severely enough to interfere with daily functioning. Alzheimer's is the most common type.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Memory loss disrupting daily life</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Confusion with time or place</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Difficulty completing familiar tasks</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Changes in mood and personality</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4. Arthritis -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-walking blog-icon"></i>
+                    <div class="blog-title">Arthritis</div>
+                    <div class="blog-subtitle">Joint pain and stiffness</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Arthritis causes inflammation in joints, leading to pain and stiffness. It's one of the most common conditions affecting older adults.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Joint pain and tenderness</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Stiffness, especially in mornings</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Swelling around joints</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Reduced range of motion</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. Diabetes Type 2 -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-tint blog-icon"></i>
+                    <div class="blog-title">Diabetes Type 2</div>
+                    <div class="blog-subtitle">Blood sugar management challenges</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Type 2 diabetes occurs when the body becomes resistant to insulin or doesn't produce enough insulin to maintain normal glucose levels.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Frequent urination and thirst</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Unexplained weight loss</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Fatigue and weakness</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Slow-healing wounds</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 6. Vision Problems -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-eye blog-icon"></i>
+                    <div class="blog-title">Vision Problems</div>
+                    <div class="blog-subtitle">Age-related eye conditions</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Vision problems like cataracts, glaucoma, and macular degeneration become more common with age, affecting quality of life.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Blurred or cloudy vision</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Difficulty seeing at night</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Sensitivity to light</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Gradual loss of peripheral vision</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 7. Hearing Loss -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-ear-listen blog-icon"></i>
+                    <div class="blog-title">Hearing Loss</div>
+                    <div class="blog-subtitle">Age-related hearing impairment</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Presbycusis is gradual hearing loss that occurs as people age. It affects one in three people over 65.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Difficulty hearing high-pitched sounds</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Trouble following conversations</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Asking people to repeat themselves</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Turning up TV volume</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 8. Depression -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-sad-tear blog-icon"></i>
+                    <div class="blog-title">Depression</div>
+                    <div class="blog-subtitle">Mental health challenges in seniors</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Depression in older adults is often overlooked but affects millions. It's not a normal part of aging and requires attention.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Persistent sadness or emptiness</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Loss of interest in activities</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Changes in appetite or sleep</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Feelings of hopelessness</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 9. COPD -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-lungs blog-icon"></i>
+                    <div class="blog-title">COPD (Chronic Obstructive Pulmonary Disease)</div>
+                    <div class="blog-subtitle">Breathing difficulties and lung damage</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        COPD is a group of lung diseases that block airflow and make breathing difficult. It's often caused by long-term smoking.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Chronic cough with mucus</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Shortness of breath</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Wheezing</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Chest tightness</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 10. Heart Disease -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-heartbeat blog-icon"></i>
+                    <div class="blog-title">Heart Disease</div>
+                    <div class="blog-subtitle">Cardiovascular complications</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Heart disease is the leading cause of death among older adults. It includes various conditions affecting the heart and blood vessels.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Chest pain or discomfort</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Shortness of breath</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Fatigue</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Irregular heartbeat</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 11. Stroke -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-head-side-virus blog-icon"></i>
+                    <div class="blog-title">Stroke</div>
+                    <div class="blog-subtitle">Brain blood supply interruption</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Stroke occurs when blood supply to part of the brain is interrupted or reduced, preventing brain tissue from getting oxygen.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Sudden numbness or weakness</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Confusion or trouble speaking</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Vision problems</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Severe headache</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 12. Parkinson's Disease -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-hand-sparkles blog-icon"></i>
+                    <div class="blog-title">Parkinson's Disease</div>
+                    <div class="blog-subtitle">Movement disorder affecting the nervous system</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Parkinson's is a progressive nervous system disorder that affects movement, causing tremors, stiffness, and balance problems.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Tremor in hands or fingers</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Slowed movement</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Rigid muscles</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Impaired posture and balance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 13. Chronic Kidney Disease -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-kidneys blog-icon"></i>
+                    <div class="blog-title">Chronic Kidney Disease</div>
+                    <div class="blog-subtitle">Gradual loss of kidney function</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        CKD is common in older adults and occurs when kidneys are damaged and can't filter blood as well as they should.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Swelling in legs and ankles</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Fatigue and weakness</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Changes in urination</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Nausea and vomiting</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 14. Cancer -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-ribbon blog-icon"></i>
+                    <div class="blog-title">Cancer</div>
+                    <div class="blog-subtitle">Age-related cancer risks</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Cancer risk increases with age. Common types in seniors include lung, breast, prostate, and colorectal cancers.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Unexplained weight loss</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Persistent fatigue</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Changes in bowel or bladder habits</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Unusual lumps or changes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 15. Insomnia -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-bed blog-icon"></i>
+                    <div class="blog-title">Insomnia & Sleep Disorders</div>
+                    <div class="blog-subtitle">Sleep quality issues in aging</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Sleep patterns change with age, and many older adults experience difficulty falling asleep or staying asleep.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Difficulty falling asleep</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Frequent nighttime awakening</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Early morning awakening</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Non-refreshing sleep</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 16. Urinary Incontinence -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-restroom blog-icon"></i>
+                    <div class="blog-title">Urinary Incontinence</div>
+                    <div class="blog-subtitle">Loss of bladder control</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Urinary incontinence affects millions of older adults and can significantly impact quality of life and social activities.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Sudden urge to urinate</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Leaking urine with coughing</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Frequent urination at night</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Inability to empty bladder</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 17. Constipation -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-stomach blog-icon"></i>
+                    <div class="blog-title">Chronic Constipation</div>
+                    <div class="blog-subtitle">Digestive system changes</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Constipation becomes more common with age due to decreased physical activity, medications, and changes in diet.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Fewer than three bowel movements per week</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Hard or lumpy stools</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Straining during bowel movements</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Feeling of incomplete evacuation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 18. Falls and Balance Issues -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-person-falling blog-icon"></i>
+                    <div class="blog-title">Falls & Balance Problems</div>
+                    <div class="blog-subtitle">Mobility and stability challenges</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Falls are a leading cause of injury among older adults. Balance problems increase fall risk significantly.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Dizziness or lightheadedness</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Unsteadiness when walking</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Fear of falling</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Previous fall history</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 19. Skin Problems -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-hand-holding-medical blog-icon"></i>
+                    <div class="blog-title">Skin Problems</div>
+                    <div class="blog-subtitle">Age-related skin changes</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Aging skin becomes thinner, drier, and more fragile, leading to various skin conditions and slower healing.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Dry, itchy skin</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Age spots and wrinkles</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Slow healing wounds</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Increased bruising</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 20. Dental Problems -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-tooth blog-icon"></i>
+                    <div class="blog-title">Dental & Oral Health Issues</div>
+                    <div class="blog-subtitle">Age-related oral health challenges</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Oral health problems are common in older adults and can affect nutrition, speech, and overall quality of life.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Tooth loss and decay</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Gum disease</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Dry mouth</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Difficulty chewing or swallowing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 21. Anxiety Disorders -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-exclamation-triangle blog-icon"></i>
+                    <div class="blog-title">Anxiety Disorders</div>
+                    <div class="blog-subtitle">Excessive worry and fear in seniors</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Anxiety disorders are common but often overlooked in older adults. They can significantly impact daily functioning.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Excessive worry about health</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Restlessness and agitation</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Muscle tension</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Sleep disturbances</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 22. Chronic Pain -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-band-aid blog-icon"></i>
+                    <div class="blog-title">Chronic Pain</div>
+                    <div class="blog-subtitle">Persistent pain affecting daily life</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Chronic pain affects nearly 50% of older adults and can significantly reduce quality of life and independence.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Pain lasting more than 3 months</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Decreased mobility</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Sleep disruption</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Mood changes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 23. Medication Side Effects -->
+            <div class="blog-card" onclick="expandCard(this)">
+                <div class="blog-header">
+                    <i class="fas fa-prescription-bottle blog-icon"></i>
+                    <div class="blog-title">Medication Side Effects</div>
+                    <div class="blog-subtitle">Adverse drug reactions in seniors</div>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">
+                        Older adults are more susceptible to medication side effects due to changes in metabolism and multiple medications.
+                    </p>
+                    <ul class="symptoms-list">
+                        <li><i class="fas fa-exclamation-circle"></i> Confusion or cognitive impairment</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Dizziness and falls</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Gastrointestinal problems</li>
+                        <li><i class="fas fa-exclamation-circle"></i> Drug interactions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <h3>Stay Informed, Stay Healthy</h3>
+            <p>Regular check-ups and early detection are key to managing age-related health issues. Consult with healthcare professionals for personalized advice.</p>
+        </div>
+    </div>
+
+    <a href="#" class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Scroll to top functionality
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        document.getElementById('scrollTop').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Card expansion functionality
+        function expandCard(card) {
+            // Add a subtle animation when card is clicked
+            card.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                card.style.transform = 'scale(1)';
+            }, 150);
+            
+            // You can add more functionality here like opening a modal or navigating to a detailed page
+            console.log('Card clicked:', card.querySelector('.blog-title').textContent);
+        }
+
+        // Add click animation to category tags
+        document.querySelectorAll('.category-tag').forEach(tag => {
+            tag.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Add entrance animation
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.blog-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+Date: 20/4/2025
+Time: 14:43
+Phone Number: +91xxxxxxxxxx
+Message: Hello from Python!
+--------------------
+Date: 20/4/2025
+Time: 14:45
+Phone Number: +918790311455
+Message: Hello from Python!
+--------------------
+Date: 20/4/2025
+Time: 22:32
+Phone Number: +919989441202
+Message: Alert: Monitoring system triggered.
+--------------------
+Date: 20/4/2025
+Time: 22:58
+Phone Number: +919989441202
+Message: 🚨 Emergency Alert from Elderly Care System
+--------------------
+Date: 22/4/2025
+Time: 20:12
+Phone Number: +919989441202
+Message: 🚨 Emergency Alert from Elderly Care System
+--------------------
+Date: 22/4/2025
+Time: 20:12
+Phone Number: +919989441202
+Message: 🚨 Haii amma epidi iruka saptiya
+--------------------
+Date: 22/4/2025
+Time: 20:50
+Phone Number: +919989441202
+Message: 🚨 Haii amma epidi iruka saptiya
+--------------------
+Date: 22/4/2025
+Time: 20:54
+Phone Number: +918790311455
+Message: 🚨 Haii amma epidi iruka saptiya
+--------------------
+Date: 22/4/2025
+Time: 20:54
+Phone Number: +918790311455
+Message: 🚨 Haii amma epidi iruka saptiya
+--------------------
+Date: 22/4/2025
+Time: 20:54
+Phone Number: +918790311455
+Message: 🚨 Haii amma epidi iruka saptiya
+--------------------
+Date: 22/4/2025
+Time: 20:55
+Phone Number: +918790311455
+Message: 🚨 Haii amma epidi iruka saptiya
+--------------------
+Date: 22/4/2025
+Time: 20:56
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 22/4/2025
+Time: 20:56
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 22/4/2025
+Time: 21:1
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 22/4/2025
+Time: 21:1
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 22/4/2025
+Time: 21:1
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 22/4/2025
+Time: 21:3
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 22/4/2025
+Time: 21:4
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 22/4/2025
+Time: 21:4
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 22/4/2025
+Time: 21:16
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 23/4/2025
+Time: 11:38
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 23/4/2025
+Time: 11:41
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 23/4/2025
+Time: 11:42
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 23/4/2025
+Time: 11:44
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 23/4/2025
+Time: 11:46
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:24
+Phone Number: +919989441202
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:25
+Phone Number: +919989441202
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:27
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:28
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:41
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:41
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:44
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:51
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:54
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:55
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:55
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:57
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:58
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 20:58
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 21:1
+Phone Number: +919876543210
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 21:2
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 21:2
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 21:3
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 21:13
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 21:22
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 21:30
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 28/4/2025
+Time: 21:30
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 29/4/2025
+Time: 21:49
+Phone Number: +918790311455
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 2/5/2025
+Time: 21:29
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 5/5/2025
+Time: 21:22
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 7/5/2025
+Time: 19:55
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 10/5/2025
+Time: 10:19
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 10/5/2025
+Time: 11:59
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 10/5/2025
+Time: 11:59
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 10/5/2025
+Time: 22:47
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 25/5/2025
+Time: 18:53
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 25/5/2025
+Time: 21:8
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 26/5/2025
+Time: 14:19
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 27/5/2025
+Time: 9:5
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 27/5/2025
+Time: 9:12
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 27/5/2025
+Time: 14:35
+Phone Number: +919989441202
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 30/5/2025
+Time: 12:43
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 5/6/2025
+Time: 19:59
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 5/6/2025
+Time: 20:1
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 5/6/2025
+Time: 20:2
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 5/6/2025
+Time: 20:4
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 6/6/2025
+Time: 9:40
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 6/6/2025
+Time: 10:5
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 6/6/2025
+Time: 10:11
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 6/6/2025
+Time: 10:21
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 6/6/2025
+Time: 12:42
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 6/6/2025
+Time: 21:41
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------
+Date: 6/6/2025
+Time: 21:55
+Phone Number: +919502625277
+Message: 🚨 Emergency Alert System
+--------------------

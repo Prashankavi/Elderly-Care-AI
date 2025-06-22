@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise Routines - Mind, Body & Soul Wellness Blog</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Header Styles */
+      .header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 87, 34, 0.1),
+          transparent
+        );
+        animation: shimmer 3s infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        color: #1e88e5;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        color: #666;
+        position: relative;
+        z-index: 1;
+      }
+
+      .back-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: #1e88e5;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        z-index: 2;
+      }
+
+      .back-btn:hover {
+        background: #1565c0;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+        color: white;
+        text-decoration: none;
+      }
+
+      /* Blog Grid */
+      .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+      }
+
+      .blog-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .blog-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .blog-header {
+        background: linear-gradient(135deg, #1e88e5, #42a5f5);
+        padding: 20px;
+        color: white;
+        position: relative;
+      }
+
+      .blog-icon {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .blog-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .blog-subtitle {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      .blog-content {
+        padding: 25px;
+      }
+
+      .blog-excerpt {
+        color: #666;
+        margin-bottom: 15px;
+        line-height: 1.6;
+      }
+
+      .benefits-list {
+        list-style: none;
+        margin-bottom: 15px;
+      }
+
+      .benefits-list li {
+        padding: 5px 0;
+        border-left: 3px solid #1e88e5;
+        padding-left: 15px;
+        margin-bottom: 8px;
+        background: rgba(255, 87, 34, 0.05);
+        border-radius: 5px;
+      }
+
+      .difficulty-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .beginner {
+        background: #4caf50;
+        color: white;
+      }
+
+      .intermediate {
+        background: #ff9800;
+        color: white;
+      }
+
+      .advanced {
+        background: #f44336;
+        color: white;
+      }
+
+      .duration-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-left: 10px;
+        background: #2196f3;
+        color: white;
+      }
+
+      .read-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #1e88e5;
+        font-weight: bold;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .read-more:hover {
+        color: #1565c0;
+        transform: translateX(5px);
+      }
+
+      /* Categories Section */
+      .categories {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .categories h2 {
+        color: #1e88e5;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .category-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+      }
+
+      .category-tag {
+        background: linear-gradient(135deg, #1e88e5, #42a5f5);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .category-tag:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255, 87, 34, 0.3);
+        color: white;
+      }
+
+      .category-tag::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .category-tag:hover::before {
+        left: 100%;
+      }
+
+      /* Footer */
+      .footer {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .footer h3 {
+        color: #1e88e5;
+        margin-bottom: 15px;
+      }
+
+      .footer p {
+        color: #666;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .blog-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .back-btn {
+          position: static;
+          margin-bottom: 20px;
+          align-self: flex-start;
+        }
+
+        .category-tags {
+          gap: 10px;
+        }
+
+        .category-tag {
+          padding: 8px 16px;
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Scroll to Top Button */
+      .scroll-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #1e88e5;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .scroll-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .scroll-top:hover {
+        background: #1565c0;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255, 87, 34, 0.4);
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <a href="../dashboard.php" class="back-btn">
+          <i class="fas fa-arrow-left"></i>
+          Back to Dashboard
+        </a>
+        <h1><i class="fas fa-dumbbell"></i> Exercise Routines</h1>
+        <p>
+          Transform your body and mind through effective fitness routines for
+          every level
+        </p>
+      </div>
+
+      <div class="categories">
+        <h2>Browse by Workout Type</h2>
+        <div class="category-tags">
+          <a href="#" class="category-tag"
+            ><i class="fas fa-seedling"></i> Beginner</a
+          >
+          <a href="#" class="category-tag"><i class="fas fa-fire"></i> HIIT</a>
+          <a href="#" class="category-tag"
+            ><i class="fas fa-dumbbell"></i> Strength</a
+          >
+          <a href="#" class="category-tag"
+            ><i class="fas fa-running"></i> Cardio</a
+          >
+          <a href="#" class="category-tag"
+            ><i class="fas fa-home"></i> Home Workout</a
+          >
+          <a href="#" class="category-tag"
+            ><i class="fas fa-stopwatch"></i> Quick Fit</a
+          >
+        </div>
+      </div>
+
+      <div class="blog-grid">
+        <!-- 1. Full Body HIIT -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-fire blog-icon"></i>
+            <div class="blog-title">Full Body HIIT Workout</div>
+            <div class="blog-subtitle">
+              High-intensity interval training for maximum results
+            </div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge intermediate">Intermediate</span>
+            <span class="duration-badge">20-30 mins</span>
+            <p class="blog-excerpt">
+              A high-intensity workout that alternates between intense bursts of
+              activity and brief recovery periods to maximize calorie burn.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Burns calories efficiently
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Improves cardiovascular
+                health
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Builds lean muscle mass
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Boosts metabolism for hours
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2. Strength Training Basics -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-dumbbell blog-icon"></i>
+            <div class="blog-title">Strength Training Basics</div>
+            <div class="blog-subtitle">
+              Build muscle and increase bone density
+            </div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge beginner">Beginner</span>
+            <span class="duration-badge">45-60 mins</span>
+            <p class="blog-excerpt">
+              A comprehensive introduction to weight lifting focusing on proper
+              form and fundamental movement patterns.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Increases muscle strength
+                and size
+              </li>
+              <li><i class="fas fa-check-circle"></i> Improves bone density</li>
+              <li>
+                <i class="fas fa-check-circle"></i> Enhances functional movement
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Boosts resting metabolic
+                rate
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3. Cardio Circuit -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-running blog-icon"></i>
+            <div class="blog-title">Cardio Circuit Training</div>
+            <div class="blog-subtitle">
+              Keep your heart pumping with varied exercises
+            </div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge beginner">Beginner</span>
+            <span class="duration-badge">30-40 mins</span>
+            <p class="blog-excerpt">
+              A dynamic workout combining different cardio exercises to improve
+              endurance while keeping things interesting.
+            </p>
+            <ul class="benefits-list">
+              <li><i class="fas fa-check-circle"></i> Improves heart health</li>
+              <li><i class="fas fa-check-circle"></i> Increases endurance</li>
+              <li>
+                <i class="fas fa-check-circle"></i> Burns calories effectively
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Reduces stress and anxiety
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4. Upper Body Power -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-fist-raised blog-icon"></i>
+            <div class="blog-title">Upper Body Power Workout</div>
+            <div class="blog-subtitle">
+              Build strength in arms, chest, and shoulders
+            </div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge intermediate">Intermediate</span>
+            <span class="duration-badge">40-50 mins</span>
+            <p class="blog-excerpt">
+              Target your upper body with compound and isolation exercises
+              designed to build functional strength and muscle definition.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Builds upper body strength
+              </li>
+              <li><i class="fas fa-check-circle"></i> Improves posture</li>
+              <li>
+                <i class="fas fa-check-circle"></i> Enhances daily activities
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Sculpts arms and shoulders
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5. Lower Body Blast -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-walking blog-icon"></i>
+            <div class="blog-title">Lower Body Blast</div>
+            <div class="blog-subtitle">Strengthen legs, glutes, and core</div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge intermediate">Intermediate</span>
+            <span class="duration-badge">35-45 mins</span>
+            <p class="blog-excerpt">
+              A comprehensive lower body workout targeting quads, hamstrings,
+              glutes, and calves for complete leg development.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Strengthens leg muscles
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Improves balance and
+                stability
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Enhances athletic
+                performance
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Builds powerful glutes
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 6. Core Crusher -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-compress-alt blog-icon"></i>
+            <div class="blog-title">Core Crusher Workout</div>
+            <div class="blog-subtitle">
+              Strengthen your center for better stability
+            </div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge beginner">Beginner</span>
+            <span class="duration-badge">20-25 mins</span>
+            <p class="blog-excerpt">
+              Focus on building a strong core with exercises that target all
+              abdominal muscles and improve spinal stability.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Strengthens core muscles
+              </li>
+              <li><i class="fas fa-check-circle"></i> Improves posture</li>
+              <li><i class="fas fa-check-circle"></i> Reduces back pain</li>
+              <li>
+                <i class="fas fa-check-circle"></i> Enhances athletic
+                performance
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 7. Functional Fitness -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-tools blog-icon"></i>
+            <div class="blog-title">Functional Fitness Training</div>
+            <div class="blog-subtitle">Train movements, not just muscles</div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge intermediate">Intermediate</span>
+            <span class="duration-badge">40-50 mins</span>
+            <p class="blog-excerpt">
+              Multi-joint exercises that mimic real-life movements to improve
+              everyday functional strength and mobility.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Improves daily movement
+                patterns
+              </li>
+              <li><i class="fas fa-check-circle"></i> Reduces injury risk</li>
+              <li><i class="fas fa-check-circle"></i> Enhances coordination</li>
+              <li>
+                <i class="fas fa-check-circle"></i> Builds practical strength
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 8. Beginner's Total Body -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-seedling blog-icon"></i>
+            <div class="blog-title">Beginner's Total Body</div>
+            <div class="blog-subtitle">
+              Perfect starting point for fitness journey
+            </div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge beginner">Beginner</span>
+            <span class="duration-badge">30-35 mins</span>
+            <p class="blog-excerpt">
+              A gentle introduction to exercise focusing on basic movements and
+              building fitness foundations safely.
+            </p>
+            <ul class="benefits-list">
+              <li><i class="fas fa-check-circle"></i> Builds exercise habit</li>
+              <li>
+                <i class="fas fa-check-circle"></i> Improves basic fitness
+              </li>
+              <li><i class="fas fa-check-circle"></i> Teaches proper form</li>
+              <li><i class="fas fa-check-circle"></i> Boosts confidence</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 9. Plyometric Power -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-bolt blog-icon"></i>
+            <div class="blog-title">Plyometric Power Training</div>
+            <div class="blog-subtitle">
+              Explosive movements for athletic power
+            </div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge advanced">Advanced</span>
+            <span class="duration-badge">25-35 mins</span>
+            <p class="blog-excerpt">
+              High-intensity jumping and explosive movements designed to improve
+              power, speed, and athletic performance.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Develops explosive power
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Improves athletic
+                performance
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Builds fast-twitch muscles
+              </li>
+              <li><i class="fas fa-check-circle"></i> Enhances coordination</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 10. Flexibility & Mobility -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-expand-arrows-alt blog-icon"></i>
+            <div class="blog-title">Flexibility & Mobility Flow</div>
+            <div class="blog-subtitle">
+              Improve range of motion and prevent injury
+            </div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge beginner">Beginner</span>
+            <span class="duration-badge">25-30 mins</span>
+            <p class="blog-excerpt">
+              A gentle routine combining static stretches and dynamic movements
+              to improve flexibility and joint mobility.
+            </p>
+            <ul class="benefits-list">
+              <li><i class="fas fa-check-circle"></i> Increases flexibility</li>
+              <li>
+                <i class="fas fa-check-circle"></i> Improves joint mobility
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Reduces muscle tension
+              </li>
+              <li><i class="fas fa-check-circle"></i> Prevents injuries</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 11. Metabolic Conditioning -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-tachometer-alt blog-icon"></i>
+            <div class="blog-title">Metabolic Conditioning</div>
+            <div class="blog-subtitle">
+              Maximize calorie burn and fitness gains
+            </div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge advanced">Advanced</span>
+            <span class="duration-badge">30-40 mins</span>
+            <p class="blog-excerpt">
+              High-intensity workout designed to improve multiple energy systems
+              while maximizing calorie burn.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Improves multiple fitness
+                aspects
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Maximizes calorie burn
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Builds mental toughness
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Enhances work capacity
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 12. Home Bodyweight Circuit -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-home blog-icon"></i>
+            <div class="blog-title">Home Bodyweight Circuit</div>
+            <div class="blog-subtitle">
+              No equipment needed - just your body
+            </div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge beginner">Beginner</span>
+            <span class="duration-badge">25-35 mins</span>
+            <p class="blog-excerpt">
+              Effective full-body workout using only bodyweight exercises that
+              can be done anywhere, anytime.
+            </p>
+            <ul class="benefits-list">
+              <li><i class="fas fa-check-circle"></i> No equipment required</li>
+              <li><i class="fas fa-check-circle"></i> Can be done anywhere</li>
+              <li>
+                <i class="fas fa-check-circle"></i> Improves functional strength
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Perfect for busy schedules
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 13. Tabata Training -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-stopwatch blog-icon"></i>
+            <div class="blog-title">Tabata Training Protocol</div>
+            <div class="blog-subtitle">4 minutes of maximum intensity</div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge advanced">Advanced</span>
+            <span class="duration-badge">12-16 mins</span>
+            <p class="blog-excerpt">
+              Ultra-high intensity workout protocol featuring 20 seconds of
+              all-out effort followed by 10 seconds of rest.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Maximum results in minimum
+                time
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Improves anaerobic capacity
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Boosts metabolism
+                significantly
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Builds mental resilience
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 14. Athletic Performance -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-medal blog-icon"></i>
+            <div class="blog-title">Athletic Performance Training</div>
+            <div class="blog-subtitle">Train like a pro athlete</div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge advanced">Advanced</span>
+            <span class="duration-badge">60-90 mins</span>
+            <p class="blog-excerpt">
+              Comprehensive training program combining strength, power, speed,
+              and agility for peak athletic performance.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Maximizes athletic potential
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Improves sport-specific
+                skills
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Builds competitive edge
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Prevents sports injuries
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 15. Senior Fitness -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-heart blog-icon"></i>
+            <div class="blog-title">Senior Fitness Program</div>
+            <div class="blog-subtitle">Stay active and healthy at any age</div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge beginner">Beginner</span>
+            <span class="duration-badge">30-40 mins</span>
+            <p class="blog-excerpt">
+              Gentle yet effective exercises designed specifically for older
+              adults to maintain strength, balance, and independence.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Maintains bone density
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Improves balance and
+                stability
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Preserves independence
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Enhances quality of life
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 16. Recovery & Regeneration -->
+        <div class="blog-card" onclick="expandCard(this)">
+          <div class="blog-header">
+            <i class="fas fa-spa blog-icon"></i>
+            <div class="blog-title">Recovery & Regeneration</div>
+            <div class="blog-subtitle">Essential for optimal performance</div>
+          </div>
+          <div class="blog-content">
+            <span class="difficulty-badge beginner">Beginner</span>
+            <span class="duration-badge">20-30 mins</span>
+            <p class="blog-excerpt">
+              Active recovery session focusing on gentle movement, stretching,
+              and techniques to enhance muscle recovery.
+            </p>
+            <ul class="benefits-list">
+              <li>
+                <i class="fas fa-check-circle"></i> Accelerates muscle recovery
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Improves joint flexibility
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Enhances cardiovascular
+                health
+              </li>
+              <li><i class="fas fa-check-circle"></i> Prevents injuries</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <h3>Stay Informed, Stay Healthy</h3>
+        <p>
+          Regular check-ups and early detection are key to managing age-related
+          health issues. Consult with healthcare professionals for personalized
+          advice.
+        </p>
+      </div>
+    </div>
+
+    <a href="#" class="scroll-top" id="scrollTop">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+      // Scroll to top functionality
+      window.addEventListener("scroll", function () {
+        const scrollTop = document.getElementById("scrollTop");
+        if (window.pageYOffset > 300) {
+          scrollTop.classList.add("visible");
+        } else {
+          scrollTop.classList.remove("visible");
+        }
+      });
+
+      document
+        .getElementById("scrollTop")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+
+      // Card expansion functionality
+      function expandCard(card) {
+        // Add a subtle animation when card is clicked
+        card.style.transform = "scale(0.98)";
+        setTimeout(() => {
+          card.style.transform = "scale(1)";
+        }, 150);
+
+        // You can add more functionality here like opening a modal or navigating to a detailed page
+        console.log(
+          "Card clicked:",
+          card.querySelector(".blog-title").textContent
+        );
+      }
+
+      // Add click animation to category tags
+      document.querySelectorAll(".category-tag").forEach((tag) => {
+        tag.addEventListener("click", function (e) {
+          e.preventDefault();
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            this.style.transform = "scale(1)";
+          }, 150);
+        });
+      });
+
+      // Add entrance animation
+      window.addEventListener("load", function () {
+        const cards = document.querySelectorAll(".blog-card");
+        cards.forEach((card, index) => {
+          card.style.opacity = "0";
+          card.style.transform = "translateY(30px)";
+          setTimeout(() => {
+            card.style.transition = "all 0.6s ease";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          }, index * 100);
+        });
+      });
+    </script>
+  </body>
+</html>

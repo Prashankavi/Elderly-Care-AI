@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ElderCare - AI Health Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .chat-popup {
+        width: 95%;
+        height: 95vh;
+        /* keep existing styles */
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .chat-header {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .chat-header-left {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .header-icon {
+        font-size: 24px;
+      }
+
+      .header-title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .chat-header-right {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .model-selector {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .model-selector option {
+        background: #4facfe;
+        color: white;
+      }
+
+      .clear-chat,
+      .close-btn {
+        color: white;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .clear-chat:hover,
+      .close-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .status-indicator {
+        padding: 10px 20px;
+        text-align: center;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .status-online {
+        background: #d4edda;
+        color: #155724;
+        border-bottom: 1px solid #c3e6cb;
+      }
+
+      .status-offline {
+        background: #f8d7da;
+        color: #721c24;
+        border-bottom: 1px solid #f5c6cb;
+      }
+
+      .status-connecting {
+        background: #fff3cd;
+        color: #856404;
+        border-bottom: 1px solid #ffeaa7;
+      }
+
+      .chat-body {
+        flex: 1;
+        overflow: hidden;
+      }
+
+      .chat-messages {
+        height: 100%;
+        overflow-y: auto;
+        padding: 20px;
+        background: #f8f9fa;
+      }
+
+      .welcome-message {
+        text-align: center;
+        padding: 40px 20px;
+        color: #6c757d;
+      }
+
+      .welcome-message h2 {
+        color: #343a40;
+        margin-bottom: 15px;
+      }
+
+      .welcome-message ul {
+        text-align: left;
+        max-width: 400px;
+        margin: 20px auto;
+      }
+
+      .welcome-message li {
+        margin: 8px 0;
+      }
+
+      .suggestion-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 30px;
+      }
+
+      .suggestion-chip {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .suggestion-chip:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+      }
+
+      .message {
+        display: flex;
+        margin-bottom: 20px;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .message-user {
+        justify-content: flex-end;
+      }
+
+      .message-assistant {
+        justify-content: flex-start;
+      }
+
+      .message-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 10px;
+        font-size: 18px;
+        color: white;
+      }
+
+      .message-user .message-avatar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .message-assistant .message-avatar {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      }
+
+      .message-content {
+        max-width: 70%;
+        padding: 15px 20px;
+        border-radius: 18px;
+        position: relative;
+      }
+
+      .message-user .message-content {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-bottom-right-radius: 5px;
+      }
+
+      .message-assistant .message-content {
+        background: white;
+        color: #343a40;
+        border: 1px solid #e9ecef;
+        border-bottom-left-radius: 5px;
+      }
+
+      .message-timestamp {
+        font-size: 11px;
+        opacity: 0.7;
+        margin-top: 5px;
+      }
+
+      .chat-footer {
+        padding: 20px;
+        background: white;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .chat-input-form {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .chat-input {
+        flex: 1;
+        padding: 15px 20px;
+        border: 2px solid #e9ecef;
+        border-radius: 25px;
+        font-size: 16px;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      .chat-input:focus {
+        border-color: #4facfe;
+        box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+      }
+
+      .send-btn {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .send-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+      }
+
+      .send-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .typing-indicator {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 15px 20px;
+        background: white;
+        border-radius: 18px;
+        border-bottom-left-radius: 5px;
+        margin-bottom: 20px;
+        max-width: 80px;
+        border: 1px solid #e9ecef;
+      }
+
+      .typing-indicator span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #4facfe;
+        animation: typing 1.4s infinite ease-in-out;
+      }
+
+      .typing-indicator span:nth-child(1) {
+        animation-delay: -0.32s;
+      }
+      .typing-indicator span:nth-child(2) {
+        animation-delay: -0.16s;
+      }
+
+      @keyframes typing {
+        0%,
+        80%,
+        100% {
+          transform: scale(0);
+          opacity: 0.5;
+        }
+        40% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .error-message {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin: 10px 0;
+        border: 1px solid #f5c6cb;
+      }
+
+      @media (max-width: 768px) {
+        .chat-popup {
+          height: 90vh;
+          margin: 10px;
+        }
+
+        .header-title {
+          font-size: 16px;
+        }
+
+        .suggestion-chips {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .message-content {
+          max-width: 85%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-popup">
+      <header class="chat-header">
+        <div class="chat-header-left">
+          <i class="fas fa-robot header-icon"></i>
+          <h1 class="header-title">ElderCare AI Health Assistant</h1>
+        </div>
+        <div class="chat-header-right">
+          <a href="Others/dashboard.php" class="clear-chat">
+                <i class="fas fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+          <select class="model-selector" id="modelSelector">
+            <option value="tinyllama">TinyLlama</option>
+            <option value="medbot">MedBot</option>
+          </select>
+          <button class="clear-chat" onclick="clearChat()">
+            <i class="fas fa-trash-alt"></i> Clear Chat
+          </button>
+          <a class="close-btn" href="index.php">
+            <i class="fas fa-times"></i>
+          </a>
+        </div>
+      </header>
+
+      <div class="status-indicator" id="statusIndicator">
+        <i class="fas fa-circle-notch fa-spin"></i> Connecting to AI Model...
+      </div>
+
+      <div class="chat-body">
+        <div class="chat-messages" id="chatMessages">
+          <div class="welcome-message">
+            <h2>Welcome to ElderCare AI Health Assistant</h2>
+            <p>
+              I'm here to help you with health monitoring and elderly care. You
+              can ask me about:
+            </p>
+            <ul>
+              <li>Blood pressure and vital signs</li>
+              <li>Medication management</li>
+              <li>Fall prevention strategies</li>
+              <li>Exercise recommendations for seniors</li>
+              <li>Diet and nutrition guidance</li>
+              <li>Emergency response procedures</li>
+            </ul>
+            <p>How can I assist you today?</p>
+
+            <div class="suggestion-chips">
+              <div
+                class="suggestion-chip"
+                onclick="suggestQuestion('How can I monitor blood pressure at home?')"
+              >
+                Blood pressure monitoring
+              </div>
+              <div
+                class="suggestion-chip"
+                onclick="suggestQuestion('What are common fall risks for elderly?')"
+              >
+                Fall prevention
+              </div>
+              <div
+                class="suggestion-chip"
+                onclick="suggestQuestion('Best exercises for seniors?')"
+              >
+                Exercise recommendations
+              </div>
+              <div
+                class="suggestion-chip"
+                onclick="suggestQuestion('How to manage medications properly?')"
+              >
+                Medication management
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-footer">
+        <form class="chat-input-form" id="chatForm">
+          <input
+            type="text"
+            name="message"
+            id="messageInput"
+            class="chat-input"
+            placeholder="Type your health question here..."
+            autocomplete="off"
+            required
+          />
+          <button type="submit" class="send-btn" id="sendButton">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // Configuration
+      const CONFIG = {
+        ollama: {
+          baseUrl: "http://localhost:11434",
+          models: {
+            tinyllama: "tinyllama",
+            medbot: "medbot",
+          },
+        },
+      };
+
+      // Chat history storage
+      let chatHistory = [];
+      let isConnected = false;
+      let currentModel = "tinyllama";
+
+      // DOM elements
+      const chatForm = document.getElementById("chatForm");
+      const messageInput = document.getElementById("messageInput");
+      const sendButton = document.getElementById("sendButton");
+      const chatMessages = document.getElementById("chatMessages");
+      const statusIndicator = document.getElementById("statusIndicator");
+      const modelSelector = document.getElementById("modelSelector");
+
+      // System prompt for medical assistance
+      const SYSTEM_PROMPT = `You are an ElderCare AI Health Assistant. You provide helpful, accurate, and safe health information for elderly care. Always remind users to consult healthcare professionals for serious medical concerns. Focus on:
+      - General health monitoring and wellness tips
+      - Medication management guidance
+      - Fall prevention strategies
+      - Exercise recommendations for seniors
+      - Diet and nutrition advice
+      - Emergency response information
+      
+      Keep responses concise, clear, and appropriate for elderly users. Always prioritize safety and encourage professional medical consultation when needed.`;
+
+      // Function to check Ollama connection
+      async function checkOllamaConnection() {
+        try {
+          const response = await fetch(`${CONFIG.ollama.baseUrl}/api/tags`);
+          if (response.ok) {
+            const data = await response.json();
+            console.log("Available models:", data.models);
+            return true;
+          }
+          return false;
+        } catch (error) {
+          console.error("Connection error:", error);
+          return false;
+        }
+      }
+
+      // Function to update status indicator
+      function updateStatus(status, message) {
+        const statusEl = document.getElementById("statusIndicator");
+        statusEl.className = `status-indicator status-${status}`;
+
+        let icon;
+        switch (status) {
+          case "online":
+            icon = '<i class="fas fa-check-circle"></i>';
+            break;
+          case "offline":
+            icon = '<i class="fas fa-times-circle"></i>';
+            break;
+          case "connecting":
+            icon = '<i class="fas fa-circle-notch fa-spin"></i>';
+            break;
+        }
+
+        statusEl.innerHTML = `${icon} ${message}`;
+      }
+
+      // Function to send message to Ollama
+      async function sendToOllama(message) {
+        const selectedModel = CONFIG.ollama.models[currentModel];
+
+        try {
+          const response = await fetch(
+            `${CONFIG.ollama.baseUrl}/api/generate`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                model: selectedModel,
+                prompt: `${SYSTEM_PROMPT}\n\nUser: ${message}\n\nAssistant:`,
+                stream: false,
+                options: {
+                  temperature: 0.7,
+                  top_p: 0.9,
+                  top_k: 40,
+                },
+              }),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          return data.response;
+        } catch (error) {
+          console.error("Error calling Ollama:", error);
+          throw error;
+        }
+      }
+
+      // Fallback medical responses for when Ollama is unavailable
+      const fallbackResponses = {
+        "blood pressure":
+          "For blood pressure monitoring, measure at the same time daily, sit quietly for 5 minutes before measurement, and keep a log. Normal BP is below 120/80 mmHg. Consult your doctor if readings are consistently high.",
+        medication:
+          "Take medications exactly as prescribed. Use pill organizers, set reminders, and maintain an updated medication list. Never skip doses without consulting your healthcare provider.",
+        fall: "Prevent falls by removing loose rugs, improving lighting, installing grab bars, wearing proper footwear, and doing balance exercises. If you fall, check for injuries before getting up.",
+        exercise:
+          "Seniors should aim for 150 minutes of moderate exercise weekly. Good options include walking, swimming, and chair exercises. Always consult your doctor before starting new exercises.",
+        diet: "A healthy senior diet includes fruits, vegetables, whole grains, lean proteins, and adequate hydration. Limit sodium and sugar. Consider supplements if recommended by your doctor.",
+        emergency:
+          "Call 911 for severe chest pain, difficulty breathing, sudden weakness, or loss of consciousness. Keep emergency numbers handy and maintain an updated medication list.",
+      };
+
+      // Function to get fallback response
+      function getFallbackResponse(message) {
+        const lowerMessage = message.toLowerCase();
+
+        for (const [keyword, response] of Object.entries(fallbackResponses)) {
+          if (lowerMessage.includes(keyword)) {
+            return response;
+          }
+        }
+
+        return "I understand you're asking about health-related concerns. For specific medical advice, please consult with your healthcare provider. I can help with general health monitoring and elderly care information.";
+      }
+
+      // Function to add message to chat
+      function addMessage(message, role) {
+        const messageElement = document.createElement("div");
+        messageElement.className = `message message-${role}`;
+
+        const avatar = document.createElement("div");
+        avatar.className = "message-avatar";
+        const icon = document.createElement("i");
+        icon.className = `fas fa-${role === "user" ? "user" : "robot"}`;
+        avatar.appendChild(icon);
+
+        const content = document.createElement("div");
+        content.className = "message-content";
+        content.innerHTML = message.replace(/\n/g, "<br>");
+
+        const timestamp = document.createElement("div");
+        timestamp.className = "message-timestamp";
+        const now = new Date();
+        const timeString = now.toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        });
+        timestamp.textContent = timeString;
+        content.appendChild(timestamp);
+
+        messageElement.appendChild(avatar);
+        messageElement.appendChild(content);
+        chatMessages.appendChild(messageElement);
+
+        // Remove welcome message if it exists
+        const welcomeMessage = document.querySelector(".welcome-message");
+        if (welcomeMessage) {
+          welcomeMessage.remove();
+        }
+
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        return messageElement;
+      }
+
+      // Function to show typing indicator
+      function showTypingIndicator() {
+        const indicator = document.createElement("div");
+        indicator.className = "typing-indicator";
+        indicator.id = "typingIndicator";
+
+        for (let i = 0; i < 3; i++) {
+          const dot = document.createElement("span");
+          indicator.appendChild(dot);
+        }
+
+        chatMessages.appendChild(indicator);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      // Function to remove typing indicator
+      function removeTypingIndicator() {
+        const indicator = document.getElementById("typingIndicator");
+        if (indicator) {
+          indicator.remove();
+        }
+      }
+
+      // Function to show error message
+      function showError(message) {
+        const errorDiv = document.createElement("div");
+        errorDiv.className = "error-message";
+        errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+        chatMessages.appendChild(errorDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      // Function to suggest a question
+      function suggestQuestion(question) {
+        messageInput.value = question;
+        messageInput.focus();
+      }
+
+      // Function to clear chat
+      function clearChat() {
+        chatHistory = [];
+        chatMessages.innerHTML = `
+          <div class="welcome-message">
+            <h2>Welcome to ElderCare AI Health Assistant</h2>
+            <p>I'm here to help you with health monitoring and elderly care. You can ask me about:</p>
+            <ul>
+              <li>Blood pressure and vital signs</li>
+              <li>Medication management</li>
+              <li>Fall prevention strategies</li>
+              <li>Exercise recommendations for seniors</li>
+              <li>Diet and nutrition guidance</li>
+              <li>Emergency response procedures</li>
+            </ul>
+            <p>How can I assist you today?</p>
+
+            <div class="suggestion-chips">
+              <div class="suggestion-chip" onclick="suggestQuestion('How can I monitor blood pressure at home?')">
+                Blood pressure monitoring
+              </div>
+              <div class="suggestion-chip" onclick="suggestQuestion('What are common fall risks for elderly?')">
+                Fall prevention
+              </div>
+              <div class="suggestion-chip" onclick="suggestQuestion('Best exercises for seniors?')">
+                Exercise recommendations
+              </div>
+              <div class="suggestion-chip" onclick="suggestQuestion('How to manage medications properly?')">
+                Medication management
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Handle model selection change
+      modelSelector.addEventListener("change", function (e) {
+        currentModel = e.target.value;
+        updateStatus("connecting", `Switching to ${currentModel}...`);
+
+        // Test connection with new model
+        setTimeout(async () => {
+          const connected = await checkOllamaConnection();
+          if (connected) {
+            updateStatus(
+              "online",
+              `${currentModel.toUpperCase()} Model Connected`
+            );
+            isConnected = true;
+          } else {
+            updateStatus(
+              "offline",
+              `${currentModel.toUpperCase()} Model Offline - Using Fallback`
+            );
+            isConnected = false;
+          }
+        }, 1000);
+      });
+
+      // Handle form submission
+      chatForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const message = messageInput.value.trim();
+        if (!message) return;
+
+        // Disable input while processing
+        messageInput.disabled = true;
+        sendButton.disabled = true;
+
+        // Add user message
+        addMessage(message, "user");
+        chatHistory.push({
+          role: "user",
+          message: message,
+          timestamp: Date.now(),
+        });
+
+        // Clear input
+        messageInput.value = "";
+
+        // Show typing indicator
+        showTypingIndicator();
+
+        try {
+          let aiResponse;
+
+          if (isConnected) {
+            // Try to get response from Ollama
+            aiResponse = await sendToOllama(message);
+          } else {
+            // Use fallback response
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate delay
+            aiResponse = getFallbackResponse(message);
+          }
+
+          removeTypingIndicator();
+          addMessage(aiResponse, "assistant");
+          chatHistory.push({
+            role: "assistant",
+            message: aiResponse,
+            timestamp: Date.now(),
+          });
+        } catch (error) {
+          console.error("Error getting AI response:", error);
+          removeTypingIndicator();
+
+          // Show error and fallback to local response
+          showError("Connection to AI model failed. Using fallback response.");
+          const fallbackResponse = getFallbackResponse(message);
+          addMessage(fallbackResponse, "assistant");
+
+          // Update status to offline
+          updateStatus(
+            "offline",
+            `${currentModel.toUpperCase()} Model Offline - Using Fallback`
+          );
+          isConnected = false;
+        }
+
+        // Re-enable input
+        messageInput.disabled = false;
+        sendButton.disabled = false;
+        messageInput.focus();
+      });
+
+      // Initialize connection on page load
+      window.addEventListener("load", async function () {
+        messageInput.focus();
+
+        // Check initial connection
+        updateStatus("connecting", "Connecting to AI Model...");
+
+        const connected = await checkOllamaConnection();
+        if (connected) {
+          updateStatus(
+            "online",
+            `${currentModel.toUpperCase()} Model Connected`
+          );
+          isConnected = true;
+        } else {
+          updateStatus(
+            "offline",
+            `${currentModel.toUpperCase()} Model Offline - Using Fallback`
+          );
+          isConnected = false;
+        }
+      });
+
+      // Auto-resize chat messages area
+      function resizeChatMessages() {
+        const chatBody = document.querySelector(".chat-body");
+        const headerHeight =
+          document.querySelector(".chat-header").offsetHeight;
+        const statusHeight =
+          document.querySelector(".status-indicator").offsetHeight;
+        const footerHeight =
+          document.querySelector(".chat-footer").offsetHeight;
+        const availableHeight =
+          window.innerHeight - headerHeight - statusHeight - footerHeight - 40;
+
+        chatBody.style.height = `${availableHeight}px`;
+      }
+
+      // Initial resize and on window resize
+      window.addEventListener("resize", resizeChatMessages);
+      window.addEventListener("load", resizeChatMessages);
+    </script>
+  </body>
+</html>
